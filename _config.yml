@@ -1,2 +1,6 @@
+theme: jekyll-theme-minimal
 title: Qianqian (Bella) He
-description: AI/ML systems, data infrastructure, and agentic workflows.
+description: Agentic AI researcher and ML systems engineer focused on benchmarking, AI safety, data infrastructure,
+  and high-performance computing.
+url: https://belsguidetotech.github.io
+baseurl: ''
