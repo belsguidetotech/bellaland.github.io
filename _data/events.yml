@@ -1,12 +1,11 @@
-section_title: Where I Learn & Connect
+section_title: Learn & Connect
 intro: I learn through research workshops, developer communities, and conversations with people building
   AI systems in practice. I use these experiences to sharpen the questions I work on across agentic AI,
   benchmarking, safety, and ML systems.
 items:
 - date: Sep 2026
-  event: WM@Booth
+  event: WM@Booth (Poster Presenter · QIAO-Bench)
   location: Chicago Booth
-  role: Poster Presenter · QIAO-Bench
   takeaway: Exploring when predictive representations of long-horizon trajectories become useful world
     models for planning, monitoring, and control.
   impact: Using the workshop to refine the path from one-step prediction toward multi-step prediction,
@@ -14,23 +13,14 @@ items:
 - date: Aug 2026
   event: Agentic AI Summit
   location: UC Berkeley
-  role: Participant · Agentic AI & Developer Community
   takeaway: 'Long-horizon agents need more than capability: evaluation, observability, reliability, and
     safety become increasingly important as agents move into real workflows.'
   impact: Strengthened my focus on trajectory analysis, benchmarking, failure detection, recovery, and
     intervention.
 - date: '2026'
-  event: The Art and Science of Benchmarking Agents
-  location: UC Berkeley
-  role: Technical Talk · Agent Evaluation
-  takeaway: Agent evaluation should examine behavior across the execution trajectory, not only final task
-    success—where failures begin, how errors propagate, and whether an agent can recover.
-  impact: Closely aligned with the direction behind QIAO-Bench, RecoverFlow, and TraceGuard.
-- date: '2026'
   event: NVIDIA GTC
   location: San Jose
-  role: Participant · AI Infrastructure & Developer Ecosystem
-  takeaway: 'Model capability increasingly depends on the systems underneath it: GPUs, efficient inference,
+  takeaway: 'Agentic AI is the new operating system. Model capability increasingly depends on the systems underneath it: GPUs, efficient inference,
     distributed infrastructure, and reliable data pipelines.'
   impact: Deepened my interest in GPU-aware ML infrastructure, high-performance computing, efficient serving,
     and scalable ML systems.
