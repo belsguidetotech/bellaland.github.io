@@ -5,12 +5,11 @@ education:
   degree: M.S. Computer Science
   institution: University of Chicago
 intro: I work at the intersection of agentic AI and ML systems. My research focuses on benchmarking and
-  safety for long-horizon agents—understanding trajectories, predicting what happens next, detecting failures,
+  safety for long-horizon agents, predicting what happens next, detecting failures,
   enabling recovery, and building mechanisms for safer control.
 systems_intro: On the systems side, I am especially interested in data infrastructure, GPU-aware ML infrastructure,
   efficient inference, and high-performance computing. Before graduate study, I built and led machine
-  learning, data science, analytics, and product work across Alibaba, L'Oréal, Trina Solar, and AISHU
-  Technology.
+  learning, data science, analytics, and product work across Alibaba, L'Oréal, and Trina Solar.
 research_interests:
 - Agentic AI
 - Benchmarking
