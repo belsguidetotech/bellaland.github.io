@@ -1,0 +1,39 @@
+section_title: What I Build
+tracks:
+- title: Agent Benchmarking & Safety Alignment
+  description: Understanding, predicting, monitoring, and controlling long-horizon AI agents.
+  items:
+  - name: QIAO-Bench
+    focus: Trajectory analysis and prediction
+    url: https://github.com/belsguidetotech/QIAO-Bench
+  - name: RecoverFlow
+    focus: Failure detection and recovery
+  - name: TraceGuard
+    focus: Safety monitoring and control
+- title: ML Systems Infrastructure
+  description: Data- and compute-intensive infrastructure for training and serving modern ML systems.
+  items:
+  - name: GPU-aware ML infrastructure
+    focus: Scheduling, profiling, and utilization
+  - name: vLLM
+    focus: High-throughput LLM inference and serving
+  - name: Data infrastructure
+    focus: Reliable pipelines, observability, and scalable data foundations
+- title: Forecasting × Deterministic Systems
+  description: Studying the boundary between predictable structure and uncertainty in sequential systems.
+  items:
+  - name: Calibrated sports forecasting
+    focus: Probabilistic prediction, calibration, and reliability
+  - name: Predictability studies
+    focus: When forecasting adds value versus when deterministic structure dominates
+- title: ML Training & Adaptation
+  description: Methods for training, adapting, and improving intelligent systems from data and feedback.
+  items:
+  - name: ML training
+    focus: Supervised and representation learning
+  - name: Post-training
+    focus: Adaptation and alignment of foundation models
+  - name: Reinforcement learning
+    focus: Sequential decision making and policy improvement
+  - name: Imitation learning
+    focus: Learning from trajectories and demonstrations
