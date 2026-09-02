@@ -3,7 +3,7 @@ items:
 - date: '2026'
   title: 'QIAO-Bench: Evaluating Predictive World Models for Multi-Agent AI Scientists'
   subtitle: WM@Booth Workshop · Poster
-  summary: A benchmark for predicting future workflow states in long-horizon AI-scientist trajectories.
+  summary: A benchmark for predicting future workflow states in long-horizon agent trajectories.
     QIAO-Bench turns raw agent traces into structured state-action-outcome decision points and evaluates
     retrieval, linear, and JEPA-inspired predictors on held-out runs.
   topics:
