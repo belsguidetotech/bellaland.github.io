@@ -1,10 +1,13 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Qianqian (Bella) He — University of Chicago M.S. Computer Science candidate focused on LLMs, multi-agent AI scientists, world models, ML evaluation, human-AI interaction, data infrastructure, and GPU-aware ML infrastructure." />
-  <title>Qianqian (Bella) He</title>
+  <meta name="description" content="{{ site.description | escape }}" />
+  <title>{{ site.title | escape }}</title>
   <style>
     :root {
       --text: #252525;
@@ -20,7 +23,6 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-
     body {
       margin: 0;
       background: #fff;
@@ -71,7 +73,8 @@
     }
 
     .role {
-      margin: 0 0 2px;
+      margin: 0 0 4px;
+      max-width: 220px;
       font-size: 14px;
       color: #333;
     }
@@ -91,6 +94,10 @@
     }
 
     .links a { color: #444; }
+    .link-disabled {
+      color: #aaa;
+      cursor: default;
+    }
 
     nav {
       border-top: 1px solid var(--line);
@@ -101,15 +108,13 @@
     }
 
     nav a { color: var(--muted); }
-
-    main {
-      min-width: 0;
-    }
+    main { min-width: 0; }
 
     section {
       padding-bottom: 30px;
       margin-bottom: 28px;
       border-bottom: 1px solid var(--line);
+      scroll-margin-top: 28px;
     }
 
     section:last-of-type { border-bottom: 0; margin-bottom: 0; }
@@ -126,7 +131,8 @@
       letter-spacing: -0.015em;
     }
 
-    .about p {
+    .about p,
+    .section-intro {
       margin: 0 0 12px;
       max-width: 690px;
       color: var(--body);
@@ -134,29 +140,41 @@
       line-height: 1.65;
     }
 
-    .keywords {
+    .keywords,
+    .mini-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-top: 14px;
     }
 
-    .keyword {
+    .keywords { margin-top: 14px; }
+    .mini-tags { margin-top: 8px; gap: 6px; }
+
+    .keyword,
+    .mini-tag {
       display: inline-block;
-      padding: 5px 10px;
       border-radius: 5px;
       background: #f4f4f4;
       color: #555;
-      font-size: 12px;
       line-height: 1.25;
       white-space: nowrap;
+    }
+
+    .keyword {
+      padding: 5px 10px;
+      font-size: 12px;
+    }
+
+    .mini-tag {
+      padding: 3px 7px;
+      font-size: 11px;
     }
 
     .entry {
       display: grid;
       grid-template-columns: 125px minmax(0, 1fr);
       column-gap: 18px;
-      padding: 13px 0;
+      padding: 15px 0;
       border-top: 1px solid #f0f0f0;
       align-items: start;
     }
@@ -180,7 +198,7 @@
     }
 
     .sub {
-      margin: 1px 0 4px;
+      margin: 1px 0 5px;
       color: var(--link);
       font-size: 13px;
       line-height: 1.35;
@@ -190,7 +208,31 @@
       margin: 0;
       color: var(--body);
       font-size: 13px;
-      line-height: 1.5;
+      line-height: 1.55;
+    }
+
+    .research-links {
+      margin-top: 7px;
+      font-size: 12px;
+    }
+
+    .event-meta {
+      margin: 0 0 5px;
+      color: var(--link);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .event-note {
+      margin: 5px 0 0;
+      color: var(--body);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .event-label {
+      color: #333;
+      font-weight: 650;
     }
 
     .build-grid {
@@ -200,14 +242,24 @@
     }
 
     .build-card {
-      min-height: 104px;
-      padding: 13px 14px;
+      padding: 15px 16px;
       border: 1px solid var(--line);
       border-radius: 8px;
       background: #fff;
     }
 
-    .build-card .title { margin-bottom: 6px; }
+    .build-card .title { margin-bottom: 5px; }
+
+    .track-list {
+      margin: 10px 0 0;
+      padding-left: 18px;
+      color: var(--body);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .track-list li { margin: 4px 0; }
+    .track-list strong { color: #333; font-weight: 650; }
 
     footer {
       padding-top: 8px;
@@ -248,157 +300,154 @@
     }
   </style>
 </head>
+
 <body>
-  <div class="page">
-    <aside class="sidebar">
-      <img class="photo" src="assets/images/profile.jpg" alt="Qianqian Bella He" />
-      <h1>Qianqian He</h1>
-      <p class="role">M.S. Computer Science</p>
-      <p class="school">University of Chicago</p>
+{% assign profile = site.data.profile %}
+{% assign research = site.data.research %}
+{% assign events = site.data.events %}
+{% assign builds = site.data.builds %}
 
-      <div class="links" aria-label="Profile links">
-        <a href="mailto:bellahe@uchicago.edu">Email</a>
-        <a href="https://github.com/belsguidetotech" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://www.linkedin.com/in/bella-h-63b15a2a8/" target="_blank" rel="noopener">LinkedIn</a>
-        <a href="assets/QianqianHe_CV.pdf" target="_blank" rel="noopener">CV</a>
+<div class="page">
+  <aside class="sidebar">
+    <img class="photo" src="assets/images/profile.jpg" alt="{{ profile.display_name | escape }}" />
+
+    <h1>{{ profile.name }}</h1>
+    <p class="role">{{ profile.headline }}</p>
+    <p class="school">{{ profile.education.degree }} · {{ profile.education.institution }}</p>
+
+    <div class="links" aria-label="Profile links">
+      {% for link in profile.links %}
+        {% if link.url and link.url != "" %}
+          <a href="{{ link.url }}"{% if link.new_tab %} target="_blank" rel="noopener"{% endif %}>{{ link.label }}</a>
+        {% else %}
+          <span class="link-disabled" title="{{ link.note | escape }}">{{ link.label }}</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <nav aria-label="Primary navigation">
+      <a href="#about">About</a>
+      <a href="#research">Research</a>
+      <a href="#community">Learn &amp; Connect</a>
+      <a href="#experience">Experience</a>
+      <a href="#build">What I Build</a>
+    </nav>
+  </aside>
+
+  <main>
+    <section id="about" class="about">
+      <h2>About</h2>
+      <p>{{ profile.intro }}</p>
+      <p>{{ profile.systems_intro }}</p>
+
+      <div class="keywords" aria-label="Research and engineering interests">
+        {% for interest in profile.research_interests %}
+          <span class="keyword">{{ interest }}</span>
+        {% endfor %}
       </div>
+    </section>
 
-      <nav aria-label="Primary navigation">
-        <a href="#about">About</a>
-        <a href="#research">Research</a>
-        <a href="#experience">Experience</a>
-        <a href="#build">What I Build</a>
-      </nav>
-    </aside>
+    <section id="research">
+      <h2>{{ research.section_title }}</h2>
 
-    <main>
-      <section id="about" class="about">
-        <h2>About</h2>
-        <p>I am a University of Chicago M.S. Computer Science candidate working at the intersection of ML engineering, distributed systems, data science, and multi-agent AI research.</p>
-        <p>My current research includes QIAO-Bench, a benchmark for evaluating predictive world models over multi-agent AI scientist trajectories. I build LLM workflows, scalable data infrastructure, evaluation systems, and decision-intelligence tools, with experience on 10M+ multimodal records, 2M+ time-series records, human-in-the-loop AI systems, and production systems contributing $8M+ in annual savings.</p>
-        <div class="keywords" aria-label="Research and engineering keywords">
-          <span class="keyword">LLM</span>
-          <span class="keyword">Multi-Agent Systems</span>
-          <span class="keyword">ML Evaluation</span>
-          <span class="keyword">World Models</span>
-          <span class="keyword">AI Scientists</span>
-          <span class="keyword">Human-AI Interaction</span>
-          <span class="keyword">Data Infrastructure</span>
-          <span class="keyword">GPU-aware ML Infrastructure</span>
+      {% for item in research.items %}
+      <article class="entry">
+        <div class="date">{{ item.date }}</div>
+        <div>
+          <p class="title">{{ item.title }}</p>
+          <p class="sub">{{ item.subtitle }}</p>
+          <p class="desc">{{ item.summary }}</p>
+
+          {% if item.paper_url or item.code_url %}
+          <p class="research-links">
+            {% if item.paper_url %}<a href="{{ item.paper_url }}" target="_blank" rel="noopener">Paper</a>{% endif %}
+            {% if item.paper_url and item.code_url %} · {% endif %}
+            {% if item.code_url %}<a href="{{ item.code_url }}" target="_blank" rel="noopener">Code</a>{% endif %}
+          </p>
+          {% endif %}
+
+          {% if item.topics %}
+          <div class="mini-tags" aria-label="{{ item.title | escape }} topics">
+            {% for topic in item.topics %}
+              <span class="mini-tag">{{ topic }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
         </div>
-      </section>
+      </article>
+      {% endfor %}
+    </section>
 
-      <section id="research">
-        <h2>Research</h2>
-        <article class="entry">
-          <div class="date">2026</div>
-          <div>
-            <p class="title">QIAO-Bench: Evaluating Predictive World Models for Multi-Agent AI Scientists</p>
-            <p class="sub">WM@Booth Workshop · Paper and code coming soon</p>
-            <p class="desc">Introduces a benchmark for predicting future workflow states in multi-agent scientific-research trajectories, with 1,126 decision points, grouped run-level splits, semantic/exact retrieval tasks, and JEPA-inspired predictors.</p>
-            <p class="desc"><a href="" aria-label="QIAO-Bench paper link placeholder">Paper</a> · <a href="" aria-label="QIAO-Bench code link placeholder">Code</a></p>
-          </div>
-        </article>
-        <article class="entry">
-          <div class="date">2026 – Present</div>
-          <div>
-            <p class="title">Multi-Agent Long-Horizon AI Infrastructure</p>
-            <p class="sub">UChicago Data Science Institute · Prof. Chenhao Tan</p>
-            <p class="desc">Building benchmarking, data/memory and context management, multi-agent communication traces, trajectory visualization, and human-in-the-loop annotation infrastructure for long-horizon AI scientist workflows.</p>
-          </div>
-        </article>
-        <article class="entry">
-          <div class="date">2026 Target</div>
-          <div>
-            <p class="title">Reinforcement Learning for Experiment Design</p>
-            <p class="sub">NeurIPS Workshop Target</p>
-            <p class="desc">Developing adaptive representation learning and RL policies for experiment selection, scheduling, and execution in multi-agent scientific discovery.</p>
-          </div>
-        </article>
-        <article class="entry">
-          <div class="date">2024</div>
-          <div>
-            <p class="title">Explainable AI for Energy Forecasting</p>
-            <p class="sub">EIECT 2024</p>
-            <p class="desc">Built energy-consumption forecasting models with SHAP explanations to improve reliability, interpretability, and governance.</p>
-          </div>
-        </article>
-        <article class="entry">
-          <div class="date">2023</div>
-          <div>
-            <p class="title">Medical Image Classification and Interpretability</p>
-            <p class="sub">NTU Business AI Lab · Dr. Teoh Teik Toe</p>
-            <p class="desc">Developed CNN-based breast-cancer detection and interpretability dashboards, achieving 0.921 precision.</p>
-          </div>
-        </article>
-      </section>
+    <section id="community">
+      <h2>{{ events.section_title }}</h2>
+      <p class="section-intro">{{ events.intro }}</p>
 
-      <section id="experience">
-        <h2>Experience</h2>
-        <article class="entry">
-          <div class="date">2024 – 2025</div>
-          <div>
-            <p class="title">Data Scientist</p>
-            <p class="sub">Trina Solar</p>
-            <p class="desc">Built forecasting, optimization, and LLM-based decision workflows for supply-chain and energy operations, supporting $8M+ in annual savings.</p>
-          </div>
-        </article>
-        <article class="entry">
-          <div class="date">2022 – 2023</div>
-          <div>
-            <p class="title">Data Analytics &amp; Governance Manager</p>
-            <p class="sub">L'Oréal</p>
-            <p class="desc">Improved multimodal recommendation and GenAI analytics over 10M+ records, increasing recommendation relevance and reporting efficiency.</p>
-          </div>
-        </article>
-        <article class="entry">
-          <div class="date">2021 – 2022</div>
-          <div>
-            <p class="title">Product Manager</p>
-            <p class="sub">AISHU Technology</p>
-            <p class="desc">Led AIOps platform work for anomaly detection, failure prediction, infrastructure monitoring, and root-cause analysis.</p>
-          </div>
-        </article>
-        <article class="entry">
-          <div class="date">2020 – 2021</div>
-          <div>
-            <p class="title">Product Manager</p>
-            <p class="sub">Alibaba</p>
-            <p class="desc">Managed AI platform features across datasets, prototyping, model deployment, and developer experience.</p>
-          </div>
-        </article>
-      </section>
-
-      <section id="build">
-        <h2>What I Build</h2>
-        <div class="build-grid">
-          <article class="build-card">
-            <p class="title">QIAO-Bench</p>
-            <p class="desc">Benchmark pipeline for predictive world-model evaluation over multi-agent AI scientist trajectories, with grouped splits, retrieval baselines, JEPA-inspired predictors, and reproducible metrics. <a href="" aria-label="QIAO-Bench code link placeholder">Code</a> · <a href="" aria-label="QIAO-Bench paper link placeholder">Paper</a></p>
-          </article>
-          <article class="build-card">
-            <p class="title">Multi-Agent Academic Paper Pipeline</p>
-            <p class="desc">Research-data pipeline for paper metadata, extraction, structured artifacts, and evaluation-ready reports.</p>
-          </article>
-          <article class="build-card">
-            <p class="title">AI Agent Safety Evaluation</p>
-            <p class="desc">Reproducible workflows for tracing multi-step tool-use failures from prompts to unsafe actions.</p>
-          </article>
-          <article class="build-card">
-            <p class="title">GPU-aware ML Infrastructure</p>
-            <p class="desc">C++/CUDA and ONNX inference pipelines with profiling, batching, parallel loading, and reproducible artifacts.</p>
-          </article>
-          <article class="build-card">
-            <p class="title">Calibrated Sports Forecasting</p>
-            <p class="desc">Probability models evaluated with calibration, Brier score, log loss, and reliability analysis.</p>
-          </article>
+      {% for item in events.items %}
+      <article class="entry">
+        <div class="date">{{ item.date }}</div>
+        <div>
+          <p class="title">{{ item.event }}</p>
+          <p class="event-meta">{{ item.location }} · {{ item.role }}</p>
+          <p class="event-note"><span class="event-label">What I took away:</span> {{ item.takeaway }}</p>
+          <p class="event-note"><span class="event-label">Impact on my work:</span> {{ item.impact }}</p>
         </div>
-      </section>
+      </article>
+      {% endfor %}
+    </section>
 
-      <footer>
-        © 2026 Qianqian (Bella) He · <a href="mailto:bellahe@uchicago.edu">bellahe@uchicago.edu</a>
-      </footer>
-    </main>
-  </div>
+    <section id="experience">
+      <h2>Experience</h2>
+
+      {% for item in profile.experience %}
+      <article class="entry">
+        <div class="date">{{ item.date }}</div>
+        <div>
+          <p class="title">{{ item.title }}</p>
+          <p class="sub">{{ item.company }}</p>
+          <p class="desc">{{ item.description }}</p>
+
+          {% if item.topics %}
+          <div class="mini-tags" aria-label="{{ item.company | escape }} focus areas">
+            {% for topic in item.topics %}
+              <span class="mini-tag">{{ topic }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </article>
+      {% endfor %}
+    </section>
+
+    <section id="build">
+      <h2>{{ builds.section_title }}</h2>
+
+      <div class="build-grid">
+        {% for track in builds.tracks %}
+        <article class="build-card">
+          <p class="title">{{ track.title }}</p>
+          <p class="desc">{{ track.description }}</p>
+
+          <ul class="track-list">
+            {% for item in track.items %}
+            <li>
+              {% if item.url %}
+                <strong><a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.name }}</a></strong>
+              {% else %}
+                <strong>{{ item.name }}</strong>
+              {% endif %}
+              — {{ item.focus }}
+            </li>
+            {% endfor %}
+          </ul>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <footer>
+      © 2026 {{ profile.display_name }} · <a href="mailto:bellahe@uchicago.edu">bellahe@uchicago.edu</a>
+    </footer>
+  </main>
+</div>
 </body>
 </html>
